@@ -1,7 +1,8 @@
 {
-  "extends": "airbnb-base",
-  "allow": ["_id"],
-  "scripts": {
-    "lint": "npx eslint ."
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "prettier/prettier": ["error"]
   }
 }
