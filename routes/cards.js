@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
       res.send({ message: "An error has occurred on the server" });
       return;
     }
+
     res.send(JSON.parse(data));
   });
 });

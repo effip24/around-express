@@ -24,11 +24,9 @@ router.get("/:id", (req, res) => {
       return;
     }
 
-    const userData = JSON.parse(data).filter(
-      (user) => user._id === req.params.id
-    )[0];
+    const userData = JSON.parse(data).filter((user) => user._id === req.params.id)[0];
     if (!userData) {
-      res.status(400);
+      res.status(404);
       res.send({ message: "User ID not found" });
       return;
     }
