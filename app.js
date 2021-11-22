@@ -10,7 +10,7 @@ app.use(helmet());
 app.use("/cards", cards);
 app.use("/users", users);
 app.get("*", (req, res) => {
-  res.status(500);
+  res.status(404);
   res.send({ message: "Requested resource not found" });
 });
 
