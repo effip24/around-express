@@ -9,7 +9,11 @@ module.exports.getUser = (req, res) => {
     })
     .then((user) => res.status(200).send({ data: user }))
     .catch((err) => {
-      if (err.statusCode === 404) {
+      if (err.name === "CastError") {
+        res.status(400).send({
+          error: err.message,
+        });
+      } else if (err.statusCode === 404) {
         res.status(404).send({
           error: "No user was found with the given id",
         });
@@ -43,7 +47,11 @@ module.exports.createUser = (req, res) => {
 };
 module.exports.updateUser = (req, res) => {
   const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true })
+  User.findByIdAndUpdate(
+    req.user._id,
+    { name, about },
+    { runValidators: true, new: true },
+  )
     .then((user) => res.status(200).send({ data: user }))
     .catch((err) => {
       if (err.name === "ValidationError") {
@@ -59,7 +67,11 @@ module.exports.updateUser = (req, res) => {
 };
 module.exports.updateUserAvatar = (req, res) => {
   const { avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true })
+  User.findByIdAndUpdate(
+    req.user._id,
+    { avatar },
+    { runValidators: true, new: true },
+  )
     .then((user) => res.status(200).send({ data: user }))
     .catch((err) => {
       if (err.name === "ValidationError") {

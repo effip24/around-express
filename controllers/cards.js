@@ -31,9 +31,13 @@ module.exports.deleteCard = (req, res) => {
     })
     .then((card) => res.status(200).send({ data: card }))
     .catch((err) => {
-      if (err.statusCode === 404) {
+      if (err.name === "CastError") {
+        res.status(400).send({
+          error: err.message,
+        });
+      } else if (err.statusCode === 404) {
         res.status(404).send({
-          error: "No card was found with the given id",
+          error: "No card was found for the given id",
         });
       } else {
         res.status(500).send({
@@ -55,9 +59,13 @@ module.exports.likeCard = (req, res) => {
     })
     .then((card) => res.status(200).send({ data: card }))
     .catch((err) => {
-      if (err.statusCode === 404) {
+      if (err.name === "CastError") {
+        res.status(400).send({
+          error: err.message,
+        });
+      } else if (err.statusCode === 404) {
         res.status(404).send({
-          error: "No card was found with the given id",
+          error: "No card was found for the given id",
         });
       } else {
         res.status(500).send({
@@ -79,9 +87,13 @@ module.exports.dislikeCard = (req, res) => {
     })
     .then((card) => res.status(200).send({ data: card }))
     .catch((err) => {
-      if (err.statusCode === 404) {
+      if (err.name === "CastError") {
+        res.status(400).send({
+          error: err.message,
+        });
+      } else if (err.statusCode === 404) {
         res.status(404).send({
-          error: "No card was found with the given id",
+          error: "No card was found for the given id",
         });
       } else {
         res.status(500).send({
